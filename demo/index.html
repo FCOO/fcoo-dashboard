@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="da" style="font-size: 100%">
+<head>
+	<title>fcoo.dk - fcoo-dashboard - Demo</title>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv='x-dns-prefetch-control' content='on'>
+
+	<meta name='copyright' content='FCOO'>
+	<meta name='owner' content='FCOO'>
+
+  <link  href="bower_components.css" rel="stylesheet">	
+  <link  href="../src/fcoo-dashboard.css" rel="stylesheet">	
+</head>
+
+<body>
+
+    <script>
+        window.fcoo = window.fcoo || {};
+        window.fcoo.DEMO_VERSION = true;
+	</script>
+	
+	<script src="bower_components.js"></script>
+	<script src="../src/scrollbooster-babel.js"></script>
+	<script src="../src/fcoo-dashboard.js"></script>
+
+<!-- <script src="../src/_fcoo-widget-observations.js"></script> -->
+
+    
+    
+	<script>
+        window.fcoo.DEMO_VERSION = true;
+
+        //TEMP: No access to data-files on AWS. Read from old location instead 
+        window.fcoo.path.setPath({host: 'bal.fcoo.dk'});
+
+        $(() => {
+
+            function createWidgetContent($container, widget){
+                let $div = $('<div/>').appendTo($container), o = widget.options;
+
+                $div.css('text-align', 'center');
+                $div.html(
+                    'id='+widget.id + '<br>' + 
+                    'Min size='+o.minWidth+'x'+o.minHeight + '<br>'+
+                    'Max size='+o.maxWidth+'x'+o.maxHeight + '<br>'
+                );
+                $.bsButton({
+                    icon: 'fa-square-info', text:'Info in console', onClick: function(){ console.log(widget); }
+                }).appendTo($div);
+                
+                $('<br><input type="text" id="fname" name="fname">').appendTo($div);
+            }
+            
+            let dashboard = new window.fcoo.dashboard.dashboard({
+                column: 12, margin: 4, $modernizrContainer: $('body')
+                    //direction: 'vertical'
+                },
+                [
+/*                
+                    {x: 0, createContent: createWidgetContent},
+                    {x: 1, createContent: createWidgetContent},
+                    {x: 2, createContent: createWidgetContent},
+                    {x: 3, createContent: createWidgetContent},
+                    {x: 4, createContent: createWidgetContent},
+                    {x: 5, createContent: createWidgetContent},
+                    {x: 6, createContent: createWidgetContent},
+                    {x: 7, createContent: createWidgetContent},
+                    {x: 8, createContent: createWidgetContent},
+                    {x: 9, createContent: createWidgetContent},
+                    {x: 10, createContent: createWidgetContent},
+                    {x: 11, createContent: createWidgetContent},
+*/                    
+                    {maxHeight: 2, createContent: createWidgetContent},
+                    {maxHeight: 5, createContent: createWidgetContent},
+                    {maxWidth : 4, createContent: createWidgetContent},
+                    {maxWidth : 4, maxHeight: 3, createContent: createWidgetContent},
+                    {height:4, width:3, createContent: createWidgetContent}
+                ]),
+                
+            widgetOptions1 = {x:0, y:0, maxWidth: 3, createContent: createWidgetContent},
+            widgetOptions2 = {maxHeight: 3, createContent: createWidgetContent};
+            
+            let $bottomContainer = $('<div/>'),
+                $buttonContainer = $('<div/>').addClass('text-center').appendTo($bottomContainer),
+                $scrollContainer = $('<div/>').addClass('text-center').appendTo($bottomContainer);
+
+            window.fcoo.createApplication(
+                {
+                    applicationHeader: {da: 'DA: fcoo-dashboard', en: 'EN: fcoo-dashboard'},
+                    leftMenu: {
+                        width: 333, 
+                        isStandardMenu: true
+                    },
+                    bottomMenu: {
+                        isOpen    : true,
+                        $container: $bottomContainer,
+                        height    : 'auto', 
+                    }                        
+                },
+
+                //create_main_content
+                ($container) => {
+                    dashboard.createContent($container);
+
+                    $('<button class="">Add 1-3x1</button>').on('click', () => dashboard.addWidget( widgetOptions1, true )).appendTo($buttonContainer);
+                    $('<button class="">Add 1x1-3</button>').on('click', () => dashboard.addWidget( widgetOptions2, true )).appendTo($buttonContainer);
+
+                    
+                    $('<button class="hide-for-edit-mode">Rediger</button>').on('click', () => dashboard.toggleEditMode() ).appendTo($buttonContainer);
+                    $('<button >Remove first w</button>').on('click', () => {if (dashboard.widgetList.length) dashboard.removeWidget(dashboard.widgetList[0]); }).appendTo($buttonContainer);
+                    //$('<button class="show-for-edit-mode">Tilføj sub-grid</button>').on('click', () => dashboard.addSubGrid() ).appendTo($buttonContainer); 
+                    $('<button class="show-for-edit-mode">Edit OK</button>').on('click', () => dashboard.editOk() ).appendTo($buttonContainer);
+                    $('<button class="show-for-edit-mode">Edit CANCEL</button><br>&nbsp;<br>').on('click', () => dashboard.editCancel() ).appendTo($buttonContainer);
+
+
+                    dashboard.createScrollInfo($scrollContainer);
+                },                    
+
+                {
+                    ownerList  : window.fcoo.dashboard.widgetProvider,
+                    finallyFunc: function(menuList){ console.log('finallyFunc', menuList)}
+                }                
+            );
+
+
+            
+        });            
+
+
+	</script>
+</body>
+</html>

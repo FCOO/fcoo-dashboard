@@ -1,0 +1,164 @@
+/***********************************************
+	fcoo-dashboard.scss,
+
+	(c) 2024, FCOO
+
+	https://github.com/FCOO/fcoo-dashboard
+	https://github.com/FCOO
+
+
+************************************************/
+//BOURBON - http://bourbon.io/
+@import "../bower_components/bourbon/core/bourbon";
+
+//MODERNIZR-MIXIN - https://github.com/danielguillan/modernizr-mixin
+@import "../bower_components/modernizr-mixin/stylesheets/modernizr";
+
+//MATHSASS - https://github.com/terkel/mathsass
+@import "../bower_components/mathsass/dist/math";
+
+//MODERNIZR-SCSS
+@import "../bower_components/modernizr-scss/dist/modernizr-scss";
+
+
+.scrollbooster-container {
+}
+
+:root {
+    --grid-stack-background-color: rgba(150, 150, 150, .2);
+}
+
+.grid-stack-container {
+    & > .grid-stack { border: 1px solid black; }
+
+    .grid-stack, .grid-stack-sub-grid {
+        background-color  : var(--grid-stack-background-color);
+    }
+
+    .grid-stack-item-content {
+        background-color: white;
+    }
+
+}
+
+//.grid-stack-container
+.edit-mode {
+    --grid-stack-background-color: rgba(180, 180, 180, .2);
+}
+
+.edit-mode .grid-stack, .edit-mode.grid-stack {
+    box-sizing    : content-box;
+    padding-bottom: var(--grid-widget-cell-height, 200px);
+}
+
+
+
+@include show-and-hide-for-modernizr-test(
+    $modernizr-test   : "edit-mode",
+    $incl-no-selector : false
+);
+
+
+//Semi-transparent 'cover' when in edit-mode
+.widget-edit-mode {
+    width : 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .1);
+    cursor         : move;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+
+    -webkit-user-select : none;
+    -ms-user-select     : none;
+    user-select         : none;
+
+    table {
+        td {
+            background: white;
+            text-align: center;
+            padding   : 2px;
+        }
+    }
+
+}
+
+.fa-rotate-45 {
+  transform: rotate(-45deg);
+}
+
+//Adjust resize handlers to use same arrow and to be able to show only the relevant one
+.ui-resizable-s, .ui-resizable-e, .ui-resizable-se {
+    display            : none !important;
+    background-repeat  : no-repeat;
+    background-position: center;
+}
+
+.ui-resizable-e{
+    width           : 16px !important;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Pro 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc.--><path d="M505 273c9.4-9.4 9.4-24.6 0-33.9l-96-96c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l55 55L81.9 232l55-55c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L7 239c-9.4 9.4-9.4 24.6 0 33.9l96 96c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-55-55 348.1 0-55 55c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l96-96z"/></svg>');
+}
+
+.ui-resizable-s {
+    height          : 15px !important;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Pro 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc.-->  stroke="%23666" stroke-linecap="round" <path d="M177 7c-9.4-9.4-24.6-9.4-33.9 0L47 103c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l55-55 0 348.1L81 375c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l96 96c9.4 9.4 24.6 9.4 33.9 0l96-96c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-55 55 0-348.1 55 55c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L177 7z"/></svg>');
+}
+
+.ui-resizable-se {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Pro 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc.-->  stroke="%23666" stroke-linecap="round" <path d="M177 7c-9.4-9.4-24.6-9.4-33.9 0L47 103c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l55-55 0 348.1L81 375c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l96 96c9.4 9.4 24.6 9.4 33.9 0l96-96c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-55 55 0-348.1 55 55c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L177 7z"/></svg>') !important;
+    width : 15px !important;
+    height: 15px !important;
+}
+
+
+.grid-stack-item {
+    &.resize-at-e  { .ui-resizable-e  { display: block !important; } }
+    &.resize-at-s  { .ui-resizable-s  { display: block !important; } }
+    &.resize-at-se { .ui-resizable-se { display: block !important; } }
+}
+
+
+
+
+
+.dashboard-scroll-info {
+    --margin: 4px;
+    --column: 12;
+
+    --scrollbar-left : 30px;
+    --scrollbar-width: 300px;
+
+    display         : flex;
+    justify-content : space-between;
+
+    padding     : 0;
+    border      : 1px solid black;
+
+    //A 'gray' background shows current visible columns
+    background-image    : linear-gradient(rgba(black, .15) 100%, red 0%);
+    background-size      : var(--scrollbar-width) 100%;
+    background-position-x: var(--scrollbar-left);
+    background-position-y: 0;
+
+    background-repeat   : no-repeat;
+
+    background-color: white;
+
+    .column {
+        background-image: none;
+        background-color: transparent;
+        border-left : var(--margin) solid var(--grid-stack-background-color);
+        border-right: var(--margin) solid var(--grid-stack-background-color);
+        width       : calc(100% / var(--column));
+        color       : gray;
+        cursor      : pointer;
+        &:hover {
+            color           : black;
+            background-color: rgba(lightgray, .4);
+        }
+
+    }
+}

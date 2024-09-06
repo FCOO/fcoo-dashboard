@@ -1,0 +1,40 @@
+{
+  "name": "fcoo-dashboard",
+  "version": "0.1.0",
+  "homepage": "https://github.com/FCOO/fcoo-dashboard",
+  "authors": [
+    "Niels Holt"
+  ],
+  "description": "",
+  "main": [
+    "dist/fcoo-dashboard.js",
+    "dist/fcoo-dashboard.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FCOO/fcoo-dashboard.git"
+  },
+  "dependencies": {
+    "fcoo-application": "fcoo/fcoo-application#latest",
+    "gridstack-bower": "fcoo/gridstack-bower#latest",
+    "fcoo-widget": "fcoo/fcoo-widget#latest",
+    "fcoo-observations": "fcoo/fcoo-observations#^4.2.0",
+    "dragscroll": "^0.0.8"
+  },
+  "devDependencies": {
+    "bourbon": "latest",
+    "modernizr-mixin": "latest",
+    "mathsass": "latest"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "es6"
+  ]
+}

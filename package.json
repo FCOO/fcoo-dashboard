@@ -1,0 +1,16 @@
+{
+  "name": "fcoo-dashboard",
+  "version": "0.1.0",
+  "homepage": "https://github.com/FCOO/fcoo-dashboard",
+  "author": "Niels Holt nho@fcoo.dk",
+  "description": "package.json is only use for building the package. see bower.json for more info",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FCOO/fcoo-dashboard.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-fcoo-grunt-plugin": "^6.7.0"
+  },
+  "license": "MIT"
+}
